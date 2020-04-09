@@ -13,6 +13,7 @@ __copyright__   = "MIT License [see LICENSE for details]"#"Copyright 2019, CIMI"
 import sys
 import argparse
 import tensorflow as tf
+import time
 
 import utls.dataset_manager as dm
 from train import m_trainer
@@ -106,7 +107,7 @@ def main(args):
         trainer.setup()
         trainer.run(sess)
         sess.close()
-
+        
     if args.model_state=='test':
 
         if args.test_dataset=="BIPED":
@@ -115,9 +116,16 @@ def main(args):
             else:
                 print(' image size is not setted in non augmented data')
                 sys.exit()
+        
         tester = m_tester(args)
         tester.setup(sess)
+        #Dexi Start Time
+        startDexi = time.time()
         tester.run(sess)
+        #Dexi End Time
+        endDexi = time.time()
+        secondsDexi = endDexi - startDexi
+        print("Time taken for DexiNED: "+ str(secondsDexi) + " seconds.")
 
     if args.model_state=="None":
         print("Sorry the model state is {}".format(args.model_state))
