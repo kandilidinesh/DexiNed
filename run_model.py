@@ -120,12 +120,12 @@ def main(args):
         tester = m_tester(args)
         tester.setup(sess)
         #Dexi Start Time
-        startDexi = time.time()
+        #startDexi = time.time()
         tester.run(sess)
         #Dexi End Time
-        endDexi = time.time()
-        secondsDexi = endDexi - startDexi
-        print("Time taken for DexiNED: "+ str(secondsDexi) + " seconds.")
+        #endDexi = time.time()
+        #secondsDexi = endDexi - startDexi
+        #print("Time taken for DexiNED: "+ str(secondsDexi) + " seconds.")
 
     if args.model_state=="None":
         print("Sorry the model state is {}".format(args.model_state))
