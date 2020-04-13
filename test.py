@@ -60,8 +60,8 @@ class m_tester():
                 #Dexi End Time
                 endDexi = time.time()
                 secondsDexi = endDexi - startDexi
-                print("Time taken for DexiNED: "+ str(secondsDexi) + " seconds.")
-                
+                print_info('Time taken for DexiNED: {} seconds'.format(secondsDexi))
+               
                 self.save_egdemaps(edgemap, single_image=True)
                 print_info('Done testing {}, {}'.format(self.img_info[0], self.img_info[1]))
 
@@ -70,7 +70,17 @@ class m_tester():
             for i in range(n_data):
                 im, file_name = get_single_image(self.args,file_path=test_data[i])
                 self.img_info  = file_name
+                
+                #Dexi Start Time
+                startDexi = time.time()
+                
                 edgemap = session.run(self.model.predictions, feed_dict={self.model.images: [im]})
+                
+                #Dexi End Time
+                endDexi = time.time()
+                secondsDexi = endDexi - startDexi
+                print_info('Time taken for DexiNED: {} seconds'.format(secondsDexi))
+                
                 self.save_egdemaps(edgemap, single_image=True)
                 print_info('Done testing {}, {}'.format(self.img_info[0], self.img_info[1]))
 
