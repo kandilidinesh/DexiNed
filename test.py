@@ -50,8 +50,18 @@ class m_tester():
                 im, em, file_name = get_testing_batch(self.args,
                                     [test_data[0][test_data[1][i]], test_data[1][i]], use_batch=False)
                 self.img_info = file_name
+                
+                #Dexi Start Time
+                startDexi = time.time()
+                
+                #Edge map creation from the pretrained model
                 edgemap = session.run(self.model.predictions, feed_dict={self.model.images: [im]})
-
+                
+                #Dexi End Time
+                endDexi = time.time()
+                secondsDexi = endDexi - startDexi
+                print("Time taken for DexiNED: "+ str(secondsDexi) + " seconds.")
+                
                 self.save_egdemaps(edgemap, single_image=True)
                 print_info('Done testing {}, {}'.format(self.img_info[0], self.img_info[1]))
 
